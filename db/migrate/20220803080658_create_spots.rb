@@ -4,7 +4,7 @@ class CreateSpots < ActiveRecord::Migration[6.1]
       t.integer :address
       t.float :latitude
       t.float :longitude
-      t.references :review_id
+      t.references :review, null:false, foreign_key: true
       t.timestamps
     end
   end
