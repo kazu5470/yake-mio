@@ -1,2 +1,37 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<div class="container">
+    <div class="row">
+        <%= form_with model: @post, url: public_posts_path do |f| %>
+                <table>
+                    <div class="form-group">
+                        <tr>
+                            <th><%= f.label :画像 %></th>
+                            <td><%= f.file_field :post_image, accept:"image/*" %></td>
+                        </tr>
+                        <tr>
+                            <th><%= f.label :タイトル %></th>
+                            <td><%= f.text_field :title %></td>
+                        </tr>
+                        <tr>
+                            <th><%= f.label :内容 %></th>
+                            <td><%= f.text_area :body %></td>
+                        </tr>
+                        <div class="form-group row" id="star">
+                            <tr><%= f.label :star, '評価', class: 'col-md-3 col-form-label'%></tr>
+                            <%= f.hidden_field :star, id: :review_star %>
+                        </div>
+                        <script>
+                        $('#star').empty();
+                        $('#star').raty({
+                          size     : 36,
+                          starOff:  '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          scoreName: 'post[star]',
+                          half: false,
+                        });
+                        </script>
+                    </div>
+                </table> 
+            <%= f.submit '投稿する' %>
+        <% end %>
+    </div>    
+</div>        

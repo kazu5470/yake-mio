@@ -11,3 +11,12 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+//bootstrap導入
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application" 
+import '@fortawesome/fontawesome-free/js/all'
+
+window.$ = window.jQuery = require('jquery');

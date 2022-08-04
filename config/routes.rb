@@ -3,20 +3,35 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
-  devise_for :users,skip: [:passwords], controllers: {
+  devise_for :users, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
   
   root to: 'public/homes#top'
   
+  #ゲストログインのための記述
+  
+  
   namespace :public do
-    resources :posts, only: [:new, :index, :show, :edit, :update, :destroy] do
+    post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+    resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    get 'users/my_page' => 'users#show'
-    
+    resources :users, only: [:edit, :show, :update, :index] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end  
+    get 'users/unsubscribe' => 'users#unsubscribe'
+    patch 'users/withdraw' => 'users#withdraw'
+  end  
+  
+  namespace :admin do
+    resources :posts, only: [:index, :show, :destroy] do
+      resources :postcomments, only: [:destroy]
+    end 
   end  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
