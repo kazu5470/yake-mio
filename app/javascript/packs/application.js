@@ -8,10 +8,6 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
-
 //bootstrap導入
 import "jquery";
 import "popper.js";
@@ -19,4 +15,19 @@ import "bootstrap";
 import "../stylesheets/application" 
 import '@fortawesome/fontawesome-free/js/all'
 
+//星レビュー機能のための記述
+//javascriptファイル読み出し
+//= require jquery.raty.js
+
+//= require underscore
+//= require gmaps/google
+
 window.$ = window.jQuery = require('jquery');
+
+require('packs/raty')
+
+
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()
+

@@ -69,3 +69,5 @@ gem "geocoder"
 gem "gon"
 
 gem "dotenv-rails"
+
+gem 'jquery-rails'

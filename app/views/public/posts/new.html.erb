@@ -16,22 +16,37 @@
                             <td><%= f.text_area :body %></td>
                         </tr>
                         <div class="form-group row" id="star">
-                            <tr><%= f.label :star, '評価', class: 'col-md-3 col-form-label'%></tr>
+                            <%= f.label :star, '評価', class: 'col-md-3 col-form-label'%>
                             <%= f.hidden_field :star, id: :review_star %>
                         </div>
                         <script>
-                        $('#star').empty();
-                        $('#star').raty({
-                          size     : 36,
-                          starOff:  '<%= asset_path('star-off.png') %>',
-                          starOn : '<%= asset_path('star-on.png') %>',
-                          scoreName: 'post[star]',
-                          half: false,
-                        });
+                            $('#star').empty();
+                            $('#star').raty({
+                              size     : 36,
+                              starOff:  '<%= asset_path('star-off.png') %>',
+                              starOn : '<%= asset_path('star-on.png') %>',
+                              scoreName: 'post[star]',
+                              half: false,
+                            });
                         </script>
                     </div>
                 </table> 
             <%= f.submit '投稿する' %>
         <% end %>
+        <%= form_with model: @post, multipart: true do |f| %>
+            <%= f.field_for :spot do |s| %>
+                <%= s.label :address, "レビュー場所(Google Mapで検索", class: 'spot_title' %>
+                <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot_text' %>
+            <% end %>    
+        <input onclick = "codeAddress()" type = "button" value = "検索する" >
+        <% end %>
+        <div id='map'>
+        </div>
+        <style>
+        #map {
+            height: 320px;
+            width: 640px;
+        }    
+        </style>
     </div>    
 </div>        

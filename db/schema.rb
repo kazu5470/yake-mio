@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
     t.integer "user_id", null: false
     t.string "title"
     t.string "body"
-    t.string "star"
+    t.float "star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   root to: 'public/homes#top'
   
+  resources :maps, only: [:index]
   #ゲストログインのための記述
   
   
