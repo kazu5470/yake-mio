@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
   
   resources :maps, only: [:index]
-  #ゲストログインのための記述
-  
+  get '/map_request', to: 'maps#map', as: 'map_request'
   
   namespace :public do
+    #ゲストログインのための記述
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]

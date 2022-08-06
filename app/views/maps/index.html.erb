@@ -1,4 +1,17 @@
 <h2>gmap</h2>
+
+<!--地名入力用のinput追加-->
+<!--<input id='address' type='textbox' value='Sydney, NSW'>-->
+
+<!--buttonをクリックでcodeaddressを実行-->
+<!--<input type='button' value='Encode' onclick='codeAddress()'>-->
+
+<!--form_withはデフォルトでremote: trueの挙動となる-->
+<%= form_with url: map_request_path, method: :get do |f| %>
+    <%= f.text_field :address %>
+    <%= f.submit '地図表示' %>
+<% end %>    
+
 <div id='map'></div>
 
 <style>
@@ -8,11 +21,42 @@
 </style>
 
 <script>
+/* mapを関数の外で定義(codeAddressでも使うため)
+geocoderを用意
+注：google geocoder使用時はコメントアウト部分の記述を追加
+
+let map
+let geocoder
+*/
+
+let mapInstance //この記述はmap.js.erbでも使うため、タイプミスに注意する
+
 function initMap(){
   let map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: -34.397, lng: 150.644},
   zoom: 8
   });
 }
+/*
+function codeAddress(){
+    // 入力を取得
+    let inputAddress = document.getElementById('address').value;
+    // geocodingした後mapを移動
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+        if (status == 'OK') {
+            // map.setCenterで地図が移動
+            map.setCenter(results[0].geometry.location);
+            
+            // google.maps.MarkerでGoogleMap上の指定位置にマーカーが立つ
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0],geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+*/
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAonSVIj1auY4Kq7zkmRxYFvEXoR8H6FUg&callback=initMap" async defer></script>
