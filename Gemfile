@@ -61,13 +61,15 @@ gem 'net-smtp'
 gem 'devise'
 
 gem 'kaminari','~> 1.2.1'
+
 #マップ実装のためのgem
+#googlemapを簡単に作成するためのgem
 gem "gmaps4rails"
-
+#地名から経度緯度に変換するためのgem
 gem "geocoder"
-
+#JSでコントローラーの変数を使えるようにするためのgem
 gem "gon"
-
+#GoogleMapAPI KEYを隠すためのgem(環境変数化)
 gem "dotenv-rails"
 
 gem 'jquery-rails'

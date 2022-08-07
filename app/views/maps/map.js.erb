@@ -1,12 +1,11 @@
-<!--index.html.erbのscript内に-->
-<!--googole mapのインスタンス変数である-->
-<!--mapという変数があることに留意-->
-
+// index.html.erbのscript内に
+// googole mapのインスタンス変数である
+// mapという変数があることに留意
 (function(){
-    <!--位置情報ををもつ変数を用意-->
+    // 位置情報ををもつ変数を用意
     let pos = new google.maps.LatLng(
-        <%= @latlng[0] %>, <!--latitude -->
-        <%= @latlng[1] %> <!-- longitude -->
+        <%= @latlng[0] %>, // latitude
+        <%= @latlng[1] %>  // longitude
     );
     
     mapInstance.setCenter(pos)
@@ -14,4 +13,4 @@
         map: mapInstance,
         position: pos
     });
-}    
+})()

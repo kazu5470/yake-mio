@@ -7,10 +7,10 @@
 <!--<input type='button' value='Encode' onclick='codeAddress()'>-->
 
 <!--form_withはデフォルトでremote: trueの挙動となる-->
-<%= form_with url: map_request_path, method: :get do |f| %>
+<%= form_with url: map_request_path, method: :get, local: false do |f| %>
     <%= f.text_field :address %>
     <%= f.submit '地図表示' %>
-<% end %>    
+<% end %>
 
 <div id='map'></div>
 
@@ -32,12 +32,13 @@ let geocoder
 let mapInstance //この記述はmap.js.erbでも使うため、タイプミスに注意する
 
 function initMap(){
-  let map = new google.maps.Map(document.getElementById('map'), {
+  mapInstance = new google.maps.Map(document.getElementById('map'), {
   center: {lat: -34.397, lng: 150.644},
   zoom: 8
   });
 }
-/*
+
+/* こちらもgoogle geocoder使用時のコード
 function codeAddress(){
     // 入力を取得
     let inputAddress = document.getElementById('address').value;
@@ -59,4 +60,4 @@ function codeAddress(){
 }
 */
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAonSVIj1auY4Kq7zkmRxYFvEXoR8H6FUg&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap" async defer></script>

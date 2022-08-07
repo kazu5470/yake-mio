@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   }
   
   root to: 'public/homes#top'
-  
   resources :maps, only: [:index]
   get '/map_request', to: 'maps#map', as: 'map_request'
   
