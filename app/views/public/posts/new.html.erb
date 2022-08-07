@@ -33,20 +33,6 @@
                 </table> 
             <%= f.submit '投稿する' %>
         <% end %>
-        <%= form_with model: @post, multipart: true do |f| %>
-            <%= f.field_for :spot do |s| %>
-                <%= s.label :address, "レビュー場所(Google Mapで検索", class: 'spot_title' %>
-                <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot_text' %>
-            <% end %>    
-        <input onclick = "codeAddress()" type = "button" value = "検索する" >
-        <% end %>
-        <div id='map'>
-        </div>
-        <style>
-        #map {
-            height: 320px;
-            width: 640px;
-        }    
-        </style>
+        
     </div>    
 </div>        

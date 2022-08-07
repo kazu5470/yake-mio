@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   root to: 'public/homes#top'
   resources :maps, only: [:index]
   get '/map_request', to: 'maps#map', as: 'map_request'
-  
+  get 'spots/new' => 'spots#new'
+  get 'spots/show' => 'spots#show'
   namespace :public do
     #ゲストログインのための記述
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
