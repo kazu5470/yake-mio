@@ -11,12 +11,11 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @post = Post.all
+    @posts = Post.all
   end
   
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
     if @post.save
       redirect_to public_post_path(@post), notice: "正常に投稿できました"
     else
@@ -34,7 +33,7 @@ class Public::PostsController < ApplicationController
   
   private
     def post_params
-      params.require(:post).permit(:title, :body, :star)
+      params.require(:post).permit(:title, :body, :post_image, :lat, :lng, :star)
     end  
   
 end
