@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
       redirect_to public_post_path(@post), notice: "正常に投稿できました"
     else
       @posts = Post.all
-      render 'index'
+      render 'new', notice: "投稿できませんでした"
     end  
   end
   

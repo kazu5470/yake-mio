@@ -53,35 +53,29 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_favorites_on_post_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.integer "post_id"
+    t.integer "user_id"
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_post_comments_on_post_id"
-    t.index ["user_id"], name: "index_post_comments_on_user_id"
   end
 
   create_table "post_tags", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id", null: false
+    t.integer "post_id"
+    t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_post_tags_on_post_id"
-    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user", null: false
+    t.integer "user_id"
     t.string "title"
     t.string "body"
     t.float "lat"
@@ -135,11 +129,5 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "favorites", "posts"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "post_comments", "posts"
-  add_foreign_key "post_comments", "users"
-  add_foreign_key "post_tags", "posts"
-  add_foreign_key "post_tags", "tags"
   add_foreign_key "spots", "reviews"
 end
