@@ -20,15 +20,15 @@
                          <% end %>			
                         </li>
                         
-                        <li>			
-                         <!--<#%=  link_to public_cart_items_path ,class: 'nav-link text-light' do %>			-->
-                         		
-                         <!--<#% end %>			-->
+                        <li>
+                         <%= link_to new_public_post_path, class: 'nav-link text-light' do %>
+                         新規投稿
+                         <% end %>
                         </li>
                         
                         <li>			
                          <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>			
-                         logout			
+                         ログアウト		
                          <% end %>			
                         </li>			
                         			
@@ -48,7 +48,7 @@
                         
                         <li>			
                          <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>			
-                         login			
+                         ログイン			
                          <% end %>			
                         </li>			
                     <% end %>			

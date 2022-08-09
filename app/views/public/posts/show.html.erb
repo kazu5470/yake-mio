@@ -1,2 +1,56 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <table　class="margin: 5, padding: 5">
+                <tbody>
+                    <tr>
+                        
+                        <th><p>ユーザーネーム</p><%= @post.user.first_name %><%= @post.user.last_name %></th>
+                    </tr>
+                    <tr>
+                        <td><%= image_tag @post.post_image, size: "600x400" %></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><p>タイトル</p><%= @post.title %></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><p>内容</p><%= @post.body %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
+    
+        
+        <div id='map'></div>
+        <style>
+            #map {
+                height: 700px;
+                width: 50%;
+            }
+        </style>
+        
+        <!--js部分-->
+        <script>
+        //初期マップ設定
+        let map
+        let marker
+        function initMap(){
+            geocoder = new google.maps.Geocoder()
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                zoom: 15,
+            });
+            
+            marker = new google.maps.Marker({
+                position: {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                map: map
+            });
+        }
+        </script>
+           
+    </div>        
+</div> 
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>

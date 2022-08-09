@@ -13,6 +13,7 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <%= flash[:notice] %>
     <%= yield %>
        <!--<script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_KEY']}%>&callback=initMap"></script>-->
        <!--<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>-->

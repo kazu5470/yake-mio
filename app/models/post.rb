@@ -8,5 +8,7 @@ class Post < ApplicationRecord
     #マップ表示のためのspotテーブルとのアソシエーション
     has_one :spot, dependent: :destroy
     accepts_nested_attributes_for :spot
+    
+    #activestorageで画像保存
     has_one_attached :post_image
 end
