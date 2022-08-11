@@ -18,6 +18,20 @@
                         
                         <td><p>内容</p><%= @post.body %></td>
                     </tr>
+                    <tr>
+                        <div id="star-rate<%= @post.id %>"></div>
+                            <script>
+                                $('#star-rate<%= @post.id %>').empty();
+                                $('#star-rate<%= @post.id %>').raty({
+                                    size : 36,
+                                    starOff : '<%= asset_path('star-off.png') %>',
+                                    starOn : '<%= asset_path('star-on.png') %>',
+                                    half : false,
+                                    readOnly : true,
+                                    score: <%= @post.star %>,
+                                });
+                            </script>
+                    </tr>
                 </tbody>
             </table>
         </div>    
