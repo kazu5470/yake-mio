@@ -1,19 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <table>
+<div class="container-fluid">
+    <div class="row" id="col">
+            <table class="row table">
                 <tbody>
                     <tr>
-                        <th>ユーザーネーム</th>
-                        <th><%= @user.first_name %><%= @user.last_name %></th>
+                        <th><h4>ユーザーネーム</h4></th>
+                        <th><h4><%= @user.first_name %><%= @user.last_name %></h4></th>
                     </tr>
                     <tr>
-                        <th>ユーザーネーム（カナ）</th>
-                        <th><%= @user.first_name_kana %><%= @user.last_name_kana %></th>
+                        <th><h4>ユーザーネーム（カナ）</h4></th></th></th>
+                        <th><h4><%= @user.first_name_kana %><%= @user.last_name_kana %></h4></th>
                     </tr>
                     <tr>
-                        <th>自己紹介</th>
-                        <th><%= @user.introduction %></th>
+                        <th><h4>自己紹介</h4></th>
+                        <th><h4><%= @user.introduction %></h4></th>
                     </tr>
                     <tr>
                         <th>年齢</th>
@@ -27,7 +26,7 @@
                     </tr>
                 </tbody>
             </table>
-            <% if @user.first_name = 'ゲスト' %>
+            <% if @user.id == 0001 %>
                 <a id="guest">※ゲストユーザーは編集できません</a>
             <% elsif @user = current_user %>
                 <%= link_to edit_public_user_path(current_user) do %>
@@ -36,11 +35,15 @@
                     </button>
                 <% end %>
             <% end %>    
-            <style>
-                #guest {
-                    color: red;
-                }
-            </style>
-        </div>
     </div>
 </div>
+
+<style>
+    #guest {
+        color: red;
+    }
+    
+    #col {
+        padding-left: 500px;
+    }
+</style>

@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  
   def show
     @user = User.find(params[:id])
   end
@@ -19,11 +20,12 @@ class Public::UsersController < ApplicationController
   end
   
   def unsubscribe
+    @user = current_user
   end
 
   def withdraw
       @user = current_user
-      @customer.update(is_active: true)
+      @user.update(is_active: true)
       # ログアウトさせる
       reset_session
 
