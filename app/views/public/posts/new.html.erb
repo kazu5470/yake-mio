@@ -1,5 +1,4 @@
 <div class="container">
-    <!--<div class="row">-->
         <div class="col-md-6">
             <%= form_with model: @post, url: public_posts_path do |f| %>
                     <table>
@@ -41,10 +40,6 @@
                 <%= f.submit '投稿する' %>
             <% end %>
         </div>
-        <!--<div class="col-md-6">-->
-            <!--<#%= image_tag @post.post_image, size: "300x200" %>-->
-        <!--</div>-->
-    </div>    
         <input id="address" type='textbox' value="東京">
         <input type="button" value="検索" onclick="codeAddress()">
         
@@ -55,6 +50,10 @@
             #map {
                 height: 600px;
                 width: 100%;
+            }
+            
+            #address {
+                margin: 20px;
             }
         </style>
         

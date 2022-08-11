@@ -1,39 +1,74 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
-            <table　class="margin: 5, padding: 5">
-                <tbody>
-                    <tr>
-                        
-                        <th><p>ユーザーネーム</p><%= @post.user.first_name %><%= @post.user.last_name %></th>
-                    </tr>
-                    <tr>
-                        <td><%= image_tag @post.post_image, size: "600x400" %></td>
-                    </tr>
-                    <tr>
-                        
-                        <td><p>タイトル</p><%= @post.title %></td>
-                    </tr>
-                    <tr>
-                        
-                        <td><p>内容</p><%= @post.body %></td>
-                    </tr>
-                    <tr>
-                        <div id="star-rate<%= @post.id %>"></div>
-                            <script>
-                                $('#star-rate<%= @post.id %>').empty();
-                                $('#star-rate<%= @post.id %>').raty({
-                                    size : 36,
-                                    starOff : '<%= asset_path('star-off.png') %>',
-                                    starOn : '<%= asset_path('star-on.png') %>',
-                                    half : false,
-                                    readOnly : true,
-                                    score: <%= @post.star %>,
-                                });
-                            </script>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-md-6" id="show">
+            
+            <style>
+            #show {
+            padding-left: 125px;
+            }
+            </style>
+            
+                <table>
+                    <tbody>
+                        <tr>
+                            <th><p>ユーザーネーム</p><%= @post.user.first_name %><%= @post.user.last_name %></th>
+                        </tr>
+                        <tr>
+                            <td><%= image_tag @post.post_image, size: "600x400" %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>タイトル</p><%= @post.title %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>内容</p><%= @post.body %></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div id="star-rate<%= @post.id %>"></div>
+                                    <script>
+                                        $('#star-rate<%= @post.id %>').empty();
+                                        $('#star-rate<%= @post.id %>').raty({
+                                            size : 36,
+                                            starOff : '<%= asset_path('star-off.png') %>',
+                                            starOn : '<%= asset_path('star-on.png') %>',
+                                            half : false,
+                                            readOnly : true,
+                                            score: <%= @post.star %>,
+                                        });
+                                    </script>
+                            </th>        
+                        </tr>
+                        <tr>
+                            <th>
+                                <% if @post.favorited_by?(current_user) %>
+                                    <p>
+                                      <%= link_to public_post_favorites_path(@post), method: :delete do %>
+                                        <%= image_tag "nightview-on.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
+                                      <% end %>
+                                    </p>
+                                    <% else %>
+                                    <p>
+                                      <%= link_to public_post_favorites_path(@post), method: :post do %>
+                                        <%= image_tag "nightview-off.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
+                                      <% end %>
+                                    </p>
+                                <% end %>
+                            </th>    
+                        </tr>
+                        <tr>
+                            <%if @post.user == current_user %>
+                            <td>
+                                <%= link_to '投稿編集', edit_public_post_path(@post), class: "btn btn-lg btn-outline-success edit_post_#{@post.id}" %>
+                            </td>
+                            <td>
+                                <%= link_to '投稿削除', public_post_path(@post), method: :delete, class: "btn btn-lg btn-outline-danger edit_post_#{@post.id}" %>
+                            </td>
+                            <% end %>
+                        </tr>
+                    </tbody>
+                </table>
         </div>    
     
         
@@ -42,6 +77,7 @@
             #map {
                 height: 700px;
                 width: 50%;
+                padding-right: ;
             }
         </style>
         

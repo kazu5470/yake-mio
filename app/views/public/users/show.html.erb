@@ -1,2 +1,46 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>ユーザーネーム</th>
+                        <th><%= @user.first_name %><%= @user.last_name %></th>
+                    </tr>
+                    <tr>
+                        <th>ユーザーネーム（カナ）</th>
+                        <th><%= @user.first_name_kana %><%= @user.last_name_kana %></th>
+                    </tr>
+                    <tr>
+                        <th>自己紹介</th>
+                        <th><%= @user.introduction %></th>
+                    </tr>
+                    <tr>
+                        <th>年齢</th>
+                        <th><%= @user.age %></th>
+                    </tr>
+                    <tr>
+                        <% if @user = current_user %>
+                            <th>メールアドレス</th>
+                            <th><%= @user.email %></th>
+                        <% end %>    
+                    </tr>
+                </tbody>
+            </table>
+            <% if @user.first_name = 'ゲスト' %>
+                <a id="guest">※ゲストユーザーは編集できません</a>
+            <% elsif @user = current_user %>
+                <%= link_to edit_public_user_path(current_user) do %>
+                    <button type="button" class="btn btn-outline-info">
+                        編集する
+                    </button>
+                <% end %>
+            <% end %>    
+            <style>
+                #guest {
+                    color: red;
+                }
+            </style>
+        </div>
+    </div>
+</div>

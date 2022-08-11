@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
     belongs_to :user
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :post_comments
     has_many :post_tags, dependent: :destroy
     has_many :tags, through: :post_tags
@@ -11,4 +11,8 @@ class Post < ApplicationRecord
     
     #activestorageで画像保存
     has_one_attached :post_image
+    
+    def favorited_by?(user)
+       favorites.exists?(user_id: user.id)
+    end
 end

@@ -1,2 +1,100 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4" id="show">
+            
+            <style>
+            #show {
+            padding-left: 200px;
+            }
+            </style>
+            <%= form_with model: @post, url: public_post_path do |f| %>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th><p>ユーザーネーム</p><%= @post.user.first_name %><%= @post.user.last_name %></th>
+                        </tr>
+                        <tr>
+                            <td><%= f.file_field :post_image %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>タイトル</p><%= f.text_field :title %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>内容</p><%= f.text_area :body %></td>
+                        </tr>
+                        <div class="form-group row" id="star">
+                                <%= f.label :star, '評価', class: 'col-md-3 col-form-label'%>
+                                <%= f.hidden_field :star, id: :review_star %>
+                            </div>
+                                <%#= f.hidden_field :lat, id: :lat %>
+                                <%#= f.hidden_field :lng, id: :lng %>
+                            <tr>
+                                <th>
+                                    <script>
+                                        $('#star').empty();
+                                        $('#star').raty({
+                                          size     : 36,
+                                          starOff:  '<%= asset_path('star-off.png') %>',
+                                          starOn : '<%= asset_path('star-on.png') %>',
+                                          scoreName: 'post[star]',
+                                          half: false,
+                                        });
+                                    </script>
+                                </th>    
+                            </tr>    
+                        <!--<tr>-->
+                        <!--    <th>-->
+                        <!--        <div id="star-rate<%#= @post.id %>"></div>-->
+                        <!--            <script>-->
+                        <!--                $('#star-rate<%#= @post.id %>').empty();-->
+                        <!--                $('#star-rate<%#= @post.id %>').raty({-->
+                        <!--                    size : 36,-->
+                        <!--                    starOff : '<%#= asset_path('star-off.png') %>',-->
+                        <!--                    starOn : '<%#= asset_path('star-on.png') %>',-->
+                        <!--                    half : false,-->
+                        <!--                    readOnly : true,-->
+                        <!--                    score: <%#= @post.star %>,-->
+                        <!--                });-->
+                        <!--            </script>-->
+                        <!--    </th>        -->
+                        <!--</tr>-->
+                    </tbody>
+                </table>
+                <%= f.submit "変更を保存", class: 'btn btn-outline-success' %>
+            <% end %>    
+        </div>    
+    
+        
+        <div id='map'></div>
+        <style>
+            #map {
+                height: 700px;
+                width: 65%;
+            }
+        </style>
+        
+        <!--js部分-->
+        <script>
+        //初期マップ設定
+        let map
+        let marker
+        function initMap(){
+            geocoder = new google.maps.Geocoder()
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                zoom: 15,
+            });
+            
+            marker = new google.maps.Marker({
+                position: {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+                map: map
+            });
+        }
+        </script>
+           
+    </div>        
+</div> 
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>

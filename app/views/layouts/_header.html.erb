@@ -1,5 +1,5 @@
 <header>			
-    <nav class="navbar navbar-expand-lg navbar-info bg-info">			
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">			
         <div class="container">			
         <a class="navbar-brand" href="/"><span>Yake-Mio</span></a>			
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">			
@@ -9,25 +9,25 @@
                 <ul class="navbar-nav ml-auto">			
                     <% if user_signed_in? %>			
                         <li>			
-                         <%= link_to public_user_path(current_user),class: 'nav-link text-light' do %>			
+                         <%= link_to public_user_path(current_user), class: 'nav-link text-light' do %>			
                          マイページ			
                          <% end %>			
                         </li>
                         
                         <li>			
-                         <%=  link_to public_posts_path,class: 'nav-link text-light' do %>			
+                         <%=  link_to public_posts_path, class: 'nav-link text-light', data: {"turbolinks" => false} do %>			
                          投稿一覧			
                          <% end %>			
                         </li>
                         
                         <li>
-                         <%= link_to new_public_post_path, class: 'nav-link text-light' do %>
+                         <%= link_to new_public_post_path, class: 'nav-link text-light', data: {"turbolinks" => false} do %>
                          新規投稿
                          <% end %>
                         </li>
                         
                         <li>			
-                         <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>			
+                         <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>			
                          ログアウト		
                          <% end %>			
                         </li>			
@@ -35,19 +35,19 @@
                     <% else %>			
                         
                         <li>			
-                         <%= link_to public_posts_path,class: 'nav-link text-light' do %>			
+                         <%= link_to public_posts_path, class: 'nav-link text-light' do %>			
                          投稿一覧			
                          <% end %>			
                         </li>
                         
                         <li>			
-                         <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>			
+                         <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>			
                          新規登録			
                          <% end %>			
                         </li>
                         
                         <li>			
-                         <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>			
+                         <%= link_to new_user_session_path , class: 'nav-link text-light' do %>			
                          ログイン			
                          <% end %>			
                         </li>			
