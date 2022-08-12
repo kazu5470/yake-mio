@@ -7,6 +7,11 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if @user == current_user
+      render 'edit'
+    else
+      redirect_to public_user_path, notice: 'ログインユーザーではないため、編集できません'
+    end  
   end
   
   def update

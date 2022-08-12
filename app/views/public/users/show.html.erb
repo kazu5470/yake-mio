@@ -26,14 +26,14 @@
                     </tr>
                 </tbody>
             </table>
-            <% if @user.id == 0001 %>
+            <% if @user.email == 'guest@example.com' %>
                 <a id="guest">※ゲストユーザーは編集できません</a>
-            <% elsif @user = current_user %>
-                <%= link_to edit_public_user_path(current_user) do %>
+            <% elsif @user == current_user %>
+                <%= link_to edit_public_user_path(current_user.id) do %>
                     <button type="button" class="btn btn-outline-info">
                         編集する
                     </button>
-                <% end %>
+                <% end %>  
             <% end %>    
     </div>
 </div>
