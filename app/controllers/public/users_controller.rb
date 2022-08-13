@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit]
   
   def show
     @user = User.find(params[:id])
@@ -41,6 +42,21 @@ class Public::UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
+  # def ensure_correct_user
+  #   @user = User.find(params[:id])
+  #   if @user.first_name == 'ゲスト' && @user.last_name == 'ユーザー'
+  #     flash[:notice] = "ゲストユーザーは編集できません"
+  #     redirect_to public_post_path(@user)
+  #   end  
+  # end
+  
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+      unless @post.user == current_user && @post.user.id == 10000
+        redirect_to public_posts_path, notice: 'ゲストユーザーは編集できません'
+      end  
+  end  
   
   private
   
