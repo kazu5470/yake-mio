@@ -1,7 +1,7 @@
 <header>			
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">			
+    <nav class="navbar navbar-expand-lg navbar-dark" id="nav">			
         <div class="container">			
-        <a class="navbar-brand" href="/"><span>Yake-Mio</span></a>			
+        <a class="navbar-brand" href="/"><span><%= image_tag 'constellation.png', size: '200x75' %></span></a>			
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">			
         <span class="navbar-toggler-icon"></span>			
         </button>			
@@ -31,6 +31,25 @@
                          ログアウト		
                          <% end %>			
                         </li>			
+                        		
+                    <% elsif %>
+                        <li>			
+                         <%= link_to admin_users_path, class: 'nav-link text-light' do %>			
+                         ユーザー一覧			
+                         <% end %>			
+                        </li>
+                        
+                        <li>			
+                         <%=  link_to admin_posts_path, class: 'nav-link text-light', data: {"turbolinks" => false} do %>			
+                         投稿一覧			
+                         <% end %>			
+                        </li>
+                        
+                        <li>			
+                         <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>			
+                         ログアウト		
+                         <% end %>			
+                        </li>
                         			
                     <% else %>			
                         
@@ -56,4 +75,10 @@
             </div>			
         </div>			
     </nav>			
-</header>			
+</header>		
+
+<style>
+    #nav {
+        background-color: rgb(7 5 70);
+    }
+</style>
