@@ -1,11 +1,13 @@
 class Admin::PostsController < ApplicationController
     before_action :authenticate_admin!
+    
     def index
         @post = Post.all
     end
     
     def show
         @post = Post.find(params[:id])
+        @post_comment = PostComment.new
     end
     
     def edit

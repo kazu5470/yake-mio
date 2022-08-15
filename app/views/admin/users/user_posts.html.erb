@@ -1,0 +1,9 @@
+<% @post.each do |post| %>
+    <% if post.post_image.attached? %>
+        <%= image_tag post.post_image, size: '100x100' %>
+    <% else %>
+        <%= image_tag 'oga4.png', size: '50x50' %>
+    <% end %>    
+    <%= post.title %>
+    <%= post.body %>
+<% end %>    

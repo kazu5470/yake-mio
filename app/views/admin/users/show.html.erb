@@ -1,0 +1,41 @@
+<div class="container-fluid" id="container">
+    <table id="table">
+        <thead>
+            <th class="col-md-2 text-center">アイコン</th>
+            <th class="col-md-3 text-center">氏名</th>
+            <th class="col-md-1 text-center">年齢</th>
+            <th class="col-md-3 text-center">自己紹介</th>
+            <th class="col-md-1 text-center">ステータス</th>
+            <th class="col-md-5 text-center">投稿件数</th>
+        </thead>
+            <tr>
+                <td class="text-center">
+                    <% if @user.profile_image.attached? %>
+                            <%= image_tag @user.profile_image, size: '200x150'%>
+                    <% else %>
+                            <%= image_tag 'oga4.png', size: '150x100' %>
+                    <% end %>    
+                <td class="text-center"><%= @user.first_name %><%= @user.last_name %></td>
+                <td class="text-center" height='50'><%= @user.age %></td>
+                <td class="text-center"><%= @user.introduction %></td>
+                <% if @user.is_active == false%>
+                        <td class="text-center text-info">有効</td>
+                    <% else %>
+                        <td class="text-center text-danger">退会済み</td>
+                    <% end %>
+                <td class="text-center"><%= link_to user_posts_admin_user_path(@user) do %>
+                                            <%= @user.posts.count %>件
+                                        <% end %></td>
+            </tr>
+    </table>
+</div>
+
+<style>
+    #table {
+        margin-left: 200px;
+    }
+    #container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>

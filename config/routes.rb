@@ -33,8 +33,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy] do
       resources :postcomments, only: [:destroy]
     end 
-    resources :users, only: [:show, :index, :update, :edit, :destroy]
-    
+    resources :users, only: [:show, :index, :update, :edit, :destroy] do
+      get 'user/posts_all' => 'users#user_posts', as: 'user_posts', on: :member
+    end  
   end  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

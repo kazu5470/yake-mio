@@ -11,8 +11,9 @@
             <tr>
                 <td class="text-center" height='50'><%= user.id %></td>
                 <td class="text-center">
-                    <% link_to admin_user_path()
-                    <%= user.first_name %><%= user.last_name %></td>
+                    <%= link_to admin_user_path(user) do %>
+                        <%= user.first_name %><%= user.last_name %>
+                    <% end %></td>
                 <td class="text-center"><%= user.age %></td>
                     <% if user.is_active == false%>
                         <td class="text-center text-info">有効</td>
@@ -29,7 +30,7 @@
     #table {
         margin-left: 500px;
     }
-    #container {
+    container-fluid {
         margin-top: 10px;
         margin-bottom: 10px;
     }
