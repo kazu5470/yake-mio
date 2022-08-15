@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+      <div class="col m-10">
+        <p id="notice"></p><h2>会員情報編集</h2>
+        <%= form_with model: @user, url: admin_user_path(@user), method: :patch do |f| %>
+          <table class="row table">
+
+            <tr>
+              <th><%= f.label :氏名 %></th>
+              <th>(姓)</th>
+              <th><%= f.text_field :first_name, class:"form-control" %></th>
+              <th>(名)</th>
+              <th><%= f.text_field :last_name, class:"form-control" %></th>
+              </td>
+            </tr>
+
+            <tr>
+              <th><%= f.label :フリガナ %></th>
+              <th>(セイ)</th>
+              <th><%= f.text_field :first_name_kana, class:"form-control" %></th>
+              <th>(メイ)</th>
+              <th><%= f.text_field :last_name_kana, class:"form-control" %></th>
+            </tr>
+
+            <tr>
+              <th><%= f.label :会員ステータス %></th>
+              <th></th>
+              <td><%= f.radio_button :is_active, false %>
+                  <%= f.label :is_active, '有効会員', value: false %>
+              </td>
+              <th></th>
+               <td><%= f.radio_button :is_active, true %>
+                  <%= f.label :is_active, '退会済み', value: true %>
+              </td>
+            </tr>
+          </table>
+        <div class="row text-right">
+          <%= f.submit "変更を保存する" ,class: "btn btn-outline-success " %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
