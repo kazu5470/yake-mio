@@ -62,7 +62,7 @@
                             <% if admin_signed_in? %>
                                 <td>
                                     <%#= link_to '投稿編集', edit_admin_post_path(@post), class: "btn btn-lg btn-outline-success edit_post_#{@post.id}" %>
-                                    <%= link_to '投稿削除', admin_post_path(@post), method: :delete, class: "btn btn-lg btn-outline-danger edit_post_#{@post.id}" %>
+                                    <%= link_to '投稿削除', admin_post_path(@post), method: :delete, class: "btn btn-lg btn-outline-danger edit_post_#{@post.id}", data: {confirm: "本当に削除しますか？"} %>
                                 </td>
                             <% end %>    
                         </tr>
@@ -74,7 +74,7 @@
             <%= post_comment.user.first_name %><%= post_comment.user.last_name %>
             <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.body %>
             <% if post_comment.user == current_user %>
-                <%= link_to "削除", admin_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                <%= link_to "削除", admin_post_comment_path(post_comment.post, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
             <% end %>
           <% end %>
         </div> 

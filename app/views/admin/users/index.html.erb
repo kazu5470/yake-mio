@@ -20,7 +20,9 @@
                     <% else %>
                         <td class="text-center text-danger">退会済み</td>
                     <% end %>
-                <td class="text-center"><%= user.posts.count %>件</td>
+                <td class="text-center"><%= link_to user_posts_admin_user_path(user), method: :get do %>
+                                            <%= user.posts.count %>件</td>
+                                        <% end %>    
             </tr>
         <% end %>   
     </table>
