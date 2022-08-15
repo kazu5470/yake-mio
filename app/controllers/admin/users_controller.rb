@@ -1,4 +1,6 @@
 class Admin::UsersController < ApplicationController
+    before_action :authenticate_admin!
+    
     def index
         @user = User.all
     end
@@ -11,9 +13,14 @@ class Admin::UsersController < ApplicationController
         @user = User.find(params[:id])
     end
     
+    def user_posts
+        @user = User.find(params[:id])
+        @post = @user.posts.all
+    end
+    
     def update
         @user = User.find(params[:id])
-        if @user.save
+        if @user.update(user_params)
             redirect_to admin_user_path, notice: '会員情報を更新しました'
             if @user.is_active == true
                 flash[:notice] = '会員を退会処理しました'
@@ -35,4 +42,9 @@ class Admin::UsersController < ApplicationController
         end
     end
     
+    private
+    
+    def user_params
+        params.require(:user).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :age, :introduction, :profile_image, :is_active, :email)
+    end    
 end

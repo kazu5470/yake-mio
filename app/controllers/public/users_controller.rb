@@ -35,7 +35,7 @@ class Public::UsersController < ApplicationController
       # ログアウトさせる
       reset_session
 
-      flash[:notice] = "ありがとうございました。またいつでもご利用ください。"
+      flash[:notice] = "ありがとうございました。またいつでもご利用くださいませ。"
       redirect_to root_path
   end
   
@@ -61,7 +61,7 @@ class Public::UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :introduction, :age, :email)
+    params.require(:user).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :introduction, :age, :email, :is_active)
   end
   
 end

@@ -1,0 +1,39 @@
+<div class="container-fluid" id="container">
+    <table border='2' id="table">
+        <thead>
+            <th class="col-md-2 text-center">投稿画像</th>
+            <th class="col-md-3 text-center">氏名</th>
+            <th class="col-md-2 text-center">タイトル</th>
+            <th class="col-md-3 text-center">投稿内容</th>
+        </thead>
+        <% @post.each do |post| %>
+            <tr>
+                <td class="text-center">
+                    <% if post.post_image.attached? %>
+                        <%= link_to admin_post_path(post), method: :get do %>
+                            <%= image_tag post.post_image, size: '200x150'%>
+                        <% end %>    
+                    <% else %>
+                        <%= link_to admin_post_path(post), method: :get do %>
+                            <%= image_tag 'oga4.png', size: '50x50' %>
+                        <% end %>    
+                    <% end %>    
+                <td class="text-center"><%= link_to admin_user_path(post.user.id), method: :get do %>
+                                            <%= post.user.first_name %><%= post.user.last_name %></td>
+                                        <% end %>    
+                <td class="text-center" height='50'><%= post.title %></td>
+                <td class="text-center"><%= post.body %></td>
+            </tr>
+        <% end %>   
+    </table>
+</div>
+
+<style>
+    #table {
+        margin-left: 250px;
+    }
+    #container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>

@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6" id="show">
+            <table>
+                    <tbody>
+                        <tr>
+                            <th><p>ユーザーネーム</p><%= link_to admin_user_path(@post.user.id), method: :get do %>
+                                                         <%= @post.user.first_name %><%= @post.user.last_name %>
+                                                     <% end %>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td><%= image_tag @post.post_image, size: "600x400" %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>タイトル</p><%= @post.title %></td>
+                        </tr>
+                        <tr>
+                            
+                            <td><p>内容</p><%= @post.body %></td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div id="star-rate<%= @post.id %>"></div>
+                                    <script>
+                                        $('#star-rate<%= @post.id %>').empty();
+                                        $('#star-rate<%= @post.id %>').raty({
+                                            size : 36,
+                                            starOff : '<%= asset_path('star-off.png') %>',
+                                            starOn : '<%= asset_path('star-on.png') %>',
+                                            half : false,
+                                            readOnly : true,
+                                            score: <%= @post.star %>,
+                                        });
+                                    </script>
+                            </th>        
+                        </tr>
+                        <tr>
+                            <th>
+                                <% if user_signed_in? %>
+                                    <% if @post.favorited_by?(current_user) %>
+                                        <p>
+                                          <%= link_to public_post_favorites_path(@post), method: :delete do %>
+                                            <%= image_tag "nightview-on.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
+                                          <% end %>
+                                        </p>
+                                    <% else %>
+                                        <p>
+                                          <%= link_to public_post_favorites_path(@post), method: :post do %>
+                                            <%= image_tag "nightview-off.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
+                                          <% end %>
+                                        </p>
+                                    <% end %>    
+                                <% else %>
+                                    <%= image_tag "nightview-on.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
+                                <% end %>    
+                                    
+                            </th>    
+                        </tr>
+                        <tr>
+                            <% if admin_signed_in? %>
+                                <td>
+                                    <%#= link_to '投稿編集', edit_admin_post_path(@post), class: "btn btn-lg btn-outline-success edit_post_#{@post.id}" %>
+                                    <%= link_to '投稿削除', admin_post_path(@post), method: :delete, class: "btn btn-lg btn-outline-danger edit_post_#{@post.id}", data: {confirm: "本当に削除しますか？"} %>
+                                </td>
+                            <% end %>    
+                        </tr>
+                    </tbody>
+                </table>
+          <p>コメント件数：<%= @post.post_comments.count %></p>
+          <% @post.post_comments.each do |post_comment| %>
+            <p><%#= image_tag post_comment.user.get_profile_image(100,100) %></p>
+            <%= post_comment.user.first_name %><%= post_comment.user.last_name %>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.body %>
+            <% if post_comment.user == current_user %>
+                <%= link_to "削除", admin_post_comment_path(post_comment.post, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+            <% end %>
+          <% end %>
+        </div> 
+    </div>
+</div>
+
+<style>
+    #show{
+        padding-left: 550px;
+    }
+</style>

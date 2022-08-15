@@ -1,0 +1,39 @@
+<div class="container-fluid" id="container">
+    <table border='2' id="table">
+        <thead>
+            <th class="col-md-2 text-center">会員ID</th>
+            <th class="col-md-3 text-center">氏名</th>
+            <th class="col-md-2 text-center">年齢</th>
+            <th class="col-md-2 text-center">ステータス</th>
+            <th class="col-md-3 text-center">投稿件数</th>
+        </thead>
+        <% @user.each do |user| %>
+            <tr>
+                <td class="text-center" height='50'><%= user.id %></td>
+                <td class="text-center">
+                    <%= link_to admin_user_path(user) do %>
+                        <%= user.first_name %><%= user.last_name %>
+                    <% end %></td>
+                <td class="text-center"><%= user.age %></td>
+                    <% if user.is_active == false%>
+                        <td class="text-center text-info">有効</td>
+                    <% else %>
+                        <td class="text-center text-danger">退会済み</td>
+                    <% end %>
+                <td class="text-center"><%= link_to user_posts_admin_user_path(user), method: :get do %>
+                                            <%= user.posts.count %>件</td>
+                                        <% end %>    
+            </tr>
+        <% end %>   
+    </table>
+</div>
+
+<style>
+    #table {
+        margin-left: 500px;
+    }
+    container-fluid {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>

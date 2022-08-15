@@ -11,10 +11,26 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body id="body">
     <%= render 'layouts/header' %>
-    <%= flash[:notice] %>
+    <div id="flash">
+      <%= flash[:notice] %>
+    </div>  
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
 </html>
+
+<style>
+  #body {
+    background-color: rgb(7 5 70);
+  }
+  
+  *{
+    color: white;
+  }
+  
+  #flash {
+    color: white;
+  }
+</style>
