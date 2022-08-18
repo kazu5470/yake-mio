@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+/*タブレット横置きサイズで適用される設定*/
+@media screen and (max-width:1024px){
+    .social i{
+        width: 100%;
+    }
+}
+/*タブレット縦置きサイズ以下で適用される設定*/
+@media screen and (max-width:768px){
+    .social i{
+        width: 100%;
+    }
+}
+
+    
+/*スマホサイズ以下で適用される設定*/
+@media screen and (max-width:425px){
+    .social i{
+        width: 100%;
+    }
+}
