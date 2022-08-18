@@ -10,7 +10,12 @@
                             </th>
                         </tr>
                         <tr>
-                            <td><%= image_tag @post.post_image, size: "600x400" %></td>
+                            <td><% if @post.post_image.attached? %>
+                                    <%= image_tag @post.post_image, size: "600x400" %>
+                                <% else %>
+                                    <%= image_tag 'oga4.png', size: '200x150' %>
+                                <% end %>    
+                                    </td>
                         </tr>
                         <tr>
                             

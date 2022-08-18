@@ -6,11 +6,18 @@ class Post < ApplicationRecord
     has_many :tags, through: :post_tags
     
     #マップ表示のためのspotテーブルとのアソシエーション
-    # has_one :spot, dependent: :destroy
-    # accepts_nested_attributes_for :spot
+    has_one :spot, dependent: :destroy
+    accepts_nested_attributes_for :spot
     
     #activestorageで画像保存
     has_one_attached :post_image
+    
+    
+    validates :title, presence: true
+    validates :body, presence: true
+    validates :post_image, presence: true
+    validates :lat, presence: true
+    validates :lng, presence: true
     
     def favorited_by?(user)
        favorites.exists?(user_id: user.id)

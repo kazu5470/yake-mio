@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :ensure_correct_user, only: [:edit]
+  
   def new
     @post = Post.new
   end
@@ -38,6 +39,13 @@ class Public::PostsController < ApplicationController
   end
   
   def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      redirect_to public_posts_path, notice: '投稿を削除しました'
+    else
+      flash[:notice] = '投稿を削除できませんでした'
+      render 'edit'
+    end
   end
   
   def ensure_correct_user
