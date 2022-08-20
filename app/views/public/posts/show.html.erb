@@ -121,20 +121,42 @@
         </script>
         
         
-        <div>
+        <div id="comment_count">
           <p>コメント件数：<%= @post.post_comments.count %></p>
           <% @post.post_comments.each do |post_comment| %>
-            <p><%#= image_tag post_comment.user.get_profile_image(100,100) %></p>
-            <%= post_comment.user.first_name %><%= post_comment.user.last_name %>
-            <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.body %>
+            <table>
+                <tr>
+                    <td>
+                        <% if post_comment.user.profile_image.attached? %>
+                        <%= image_tag post_comment.user.profile_image, size: "100x100" %>
+                        <% else %>
+                            <%= image_tag "yakei2.png", size: "100x100" %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= post_comment.body %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <%= post_comment.user.first_name %><%= post_comment.user.last_name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                    </td>    
+                </tr>
+                        
+            </table>    
             <% if post_comment.user == current_user %>
                 <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
             <% end %>
           <% end %>
         </div>
         <div id="comment">
-          <%= form_with model: [:public, @post, @post_comment] do |f| %>
-            <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
+          <%= form_with(model: [:public, @post, @post_comment], method: :post) do |f| %>
+            <%= f.text_area :body, placeholder: "コメントをここに" %>
             <%= f.submit "送信する" %>
           <% end %>
         </div>
@@ -142,8 +164,8 @@
 </div>
 
 <style>
-    #comment {
-        text-color: black;
+    #comment_count{
+        padding-left: 125px;
     }
 </style>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap" async defer></script>

@@ -1,7 +1,17 @@
 <div class="container-fluid">
     <div class="row" id="col">
             <table class="row table">
-                <tbody>
+                <tbody id="table">
+                    <tr>
+                        <th><h4>プロフィール画像</h4></th>
+                        <th>
+                            <% if @user.profile_image.attached? %>
+                                <%= image_tag @user.profile_image, size: '300x200'%>
+                            <% else %>
+                                <%= image_tag 'yakei1.png', size: '300x200' %>
+                            <% end %>
+                        </th>    
+                    </tr>
                     <tr>
                         <th><h4>ユーザーネーム</h4></th>
                         <th><h4><%= @user.first_name %><%= @user.last_name %></h4></th>
@@ -60,5 +70,9 @@
     
     #col {
         padding-left: 500px;
+    }
+    
+    #table{
+        color: white;
     }
 </style>

@@ -13,7 +13,7 @@
                     <% if @user.profile_image.attached? %>
                             <%= image_tag @user.profile_image, size: '200x150'%>
                     <% else %>
-                            <%= image_tag 'oga4.png', size: '150x100' %>
+                            <%= image_tag 'yakei1.png', size: '150x100' %>
                     <% end %>    
                 <td class="text-center"><%= @user.first_name %><%= @user.last_name %></td>
                 <td class="text-center" height='50'><%= @user.age %></td>
@@ -27,10 +27,15 @@
                                             <%= @user.posts.count %>件
                                         <% end %></td>
             </tr>
+        <tr>
+            <td>
+                <div class="d-inline-block mr-5">
+                  <%= link_to '編集する', edit_admin_user_path, class:"btn btn-outline-success" %>
+                </div>
+            </td>    
+        </tr>    
     </table>
-         <div class="d-inline-block mr-5">
-          <%= link_to '編集する', edit_admin_user_path, class:"btn btn-outline-success" %>
-        </div>
+        
 </div>
 
 <style>

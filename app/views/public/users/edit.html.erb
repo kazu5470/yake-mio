@@ -5,11 +5,17 @@
         <h3><strong>会員情報編集</strong></h3>
           <%= form_with model: @user, url: public_user_path(@user) do |f| %>
 
-              <table class="row table">
+              <table class="row table" id="table">
+
+                <tr>
+                  <th><%= f.label :画像 %></th>
+                  <th><%= f.file_field :profile_image %></th>
+                  <th></th>
+                </tr>
 
                 <tr>
                   <th><%= f.label :ユーザーネーム %></th>
-                  <th>    <%= f.text_field :first_name, class:"form-control" %></th>
+                  <th><%= f.text_field :first_name, class:"form-control" %></th>
                   <th><%= f.text_field :last_name, class:"form-control" %></th>
 　　　　　　　　</tr>
 
@@ -35,10 +41,11 @@
                 </tr>
 
                 <div class="form-group">
-                    <th><input type="submit" name="commit" value="編集内容を保存" class="btn btn-outline-dark" data-disable-with="Update Genre"></th><td></td>
+                    <th><input type="submit" name="commit" value="編集内容を保存" class="btn btn-outline-info" data-disable-with="Update Genre"></th>
+                    <td><%= link_to '変更を破棄', public_user_path(@user), class: "btn btn-outline-warning" %></td>
                     <th>
                         <%= link_to public_users_unsubscribe_path(current_user) do %>
-                         <button type="button" class="btn btn-outline-dark">退会する</button>
+                         <button type="button" class="btn btn-outline-danger">退会する</button>
                         <% end %>
                     </th>    
                 </div>
@@ -48,3 +55,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  #table{
+    color: white;
+  }
+</style>

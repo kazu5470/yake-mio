@@ -6,6 +6,15 @@
           <table class="row table">
 
             <tr>
+              <th><%= f.label :画像 %></th>
+              <th></th>
+              <th><%= f.file_field :profile_image, class:"form-control" %></th>
+              <th></th>
+              <th></th>
+              </td>
+            </tr>
+
+            <tr>
               <th><%= f.label :氏名 %></th>
               <th>(姓)</th>
               <th><%= f.text_field :first_name, class:"form-control" %></th>
@@ -22,6 +31,13 @@
               <th><%= f.text_field :last_name_kana, class:"form-control" %></th>
             </tr>
 
+            <tr>
+              <th><%= f.label :自己紹介 %></th>
+              <th></th>
+              <th><%= f.text_area :introduction, class:"form-control" %></th>
+              <th></th>
+              <th></th>
+            </tr>
             <tr>
               <th><%= f.label :会員ステータス %></th>
               <th></th>
