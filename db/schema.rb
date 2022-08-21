@@ -92,16 +92,6 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "spots", force: :cascade do |t|
-    t.integer "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.integer "review_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["review_id"], name: "index_spots_on_review_id"
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "tag_name"
     t.datetime "created_at", precision: 6, null: false
@@ -129,5 +119,4 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "spots", "reviews"
 end
