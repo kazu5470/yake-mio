@@ -8,7 +8,7 @@ class Public::HomesController < ApplicationController
             user.password = SecureRandom.urlsafe_base64
             user.first_name = "ゲスト"
             user.last_name = "ユーザー"
-            user.id = 10000
+            user.id = 100
         end 
         sign_in user
         redirect_to public_posts_path
