@@ -60,6 +60,7 @@
             <%#= current_user.followings.inspect %>
             <%#= current_user.followers.inspect %>
             <%= render 'public/relationships/follow', user: @user %>
+            <%= link_to "投稿一覧を見る", user_posts_public_user_path(@user), class: "btn btn-lg btn-outline-success", method: :get %>
     </div>
 </div>
 

@@ -1,0 +1,31 @@
+<div class="container-fluid" id="container">
+    <div class="row">
+        <% if @post.exists? %>
+            <% @post.each do |post| %>
+                <table>
+                    <div>
+                        <th>
+                            <td><%= link_to public_post_path(post), method: :get do %>
+                                    <% if post.post_image.attached? %>
+                                    <%= image_tag post.post_image, size: '200x200' %>
+                                    <% else %>
+                                        <%= image_tag 'oga4.png', size: '50x50' %>
+                                    <% end %></td>
+                                <% end %>    
+                            <td><%= post.title %></td>
+                            <td><%= post.body %></td>
+                        </th>   
+                    </div>    
+                </table>    
+            <% end %>
+        <% else %>
+            <a>まだ投稿はありません</a>
+        <% end %>    
+    </div>        
+</div>
+
+<style>
+    #container{
+        padding-left: 350px;
+    }
+</style>

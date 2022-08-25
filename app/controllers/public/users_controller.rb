@@ -30,14 +30,19 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-      @user = current_user
-      @user.update(is_active: true)
-      # ログアウトさせる
-      reset_session
+    @user = current_user
+    @user.update(is_active: true)
+    # ログアウトさせる
+    reset_session
 
-      flash[:notice] = "ありがとうございました。またいつでもご利用くださいませ。"
-      redirect_to root_path
+    flash[:notice] = "ありがとうございました。またいつでもご利用くださいませ。"
+    redirect_to root_path
   end
+  
+  def user_posts
+    @user = User.find(params[:id])
+    @post = @user.posts.all
+  end  
   
   def index
     @users = User.all
