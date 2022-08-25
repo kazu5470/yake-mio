@@ -30,20 +30,22 @@
                             </div>
                                 <%#= f.hidden_field :lat, id: :lat %>
                                 <%#= f.hidden_field :lng, id: :lng %>
-                            <tr>
-                                <th>
+                        <tr>
+                            <th>
+                                <div id="star-rate<%= @post.id %>"></div>
                                     <script>
-                                        $('#star').empty();
-                                        $('#star').raty({
-                                          size     : 36,
-                                          starOff:  '<%= asset_path('star-off.png') %>',
-                                          starOn : '<%= asset_path('star-on.png') %>',
-                                          scoreName: 'post[star]',
-                                          half: false,
+                                        $('#star-rate<%= @post.id %>').empty();
+                                        $('#star-rate<%= @post.id %>').raty({
+                                            size : 36,
+                                            starOff : '<%= asset_path('star-off.png') %>',
+                                            starOn : '<%= asset_path('star-on.png') %>',
+                                            half : false,
+                                            readOnly : true,
+                                            score: <%= @post.star %>,
                                         });
                                     </script>
-                                </th>    
-                            </tr>    
+                            </th>        
+                        </tr>
                         <!--<tr>-->
                         <!--    <th>-->
                         <!--        <div id="star-rate<%#= @post.id %>"></div>-->
