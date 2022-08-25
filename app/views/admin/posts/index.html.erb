@@ -18,9 +18,14 @@
                             <%= image_tag 'oga4.png', size: '200x150' %>
                         <% end %>    
                     <% end %>    
-                <td class="text-center"><%= link_to admin_user_path(post.user.id), method: :get do %>
-                                            <%= post.user.first_name %><%= post.user.last_name %></td>
+                <td class="text-center"><% if post.user.email != "guest@example.com" %>
+                                            <%= link_to admin_user_path(post.user.id), method: :get do %>
+                                                <%= post.user.first_name %><%= post.user.last_name %>
+                                            <% end %>    
+                                        <% else %>
+                                            <%= post.user.first_name %><%= post.user.last_name %>
                                         <% end %>    
+                </td>                        
                 <td class="text-center" height='50'><%= post.title %></td>
                 <td class="text-center"><%= post.body %></td>
             </tr>
