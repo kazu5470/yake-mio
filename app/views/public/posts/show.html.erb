@@ -154,12 +154,14 @@
             <% end %>
           <% end %>
         </div>
-        <div id="comment">
-          <%= form_with(model: [:public, @post, @post_comment], method: :post) do |f| %>
-            <%= f.text_area :body, placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
-        </div>
+        <% if user_signed_in? %>
+            <div id="comment">
+              <%= form_with(model: [:public, @post, @post_comment], method: :post) do |f| %>
+                <%= f.text_area :body, placeholder: "コメントをここに" %>
+                <%= f.submit "送信する" %>
+              <% end %>
+        <% end %>      
+            </div>
     </div>        
 </div>
 
