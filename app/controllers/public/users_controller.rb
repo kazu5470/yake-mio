@@ -56,12 +56,12 @@ class Public::UsersController < ApplicationController
   #   end  
   # end
   
-  def ensure_correct_user
-    @post = Post.find(params[:id])
-      unless @post.user == current_user
-        redirect_to public_posts_path, notice: 'ゲストユーザーは編集できません'
-      end  
-  end  
+  # def ensure_correct_user
+  #   @post = Post.find(params[:id])
+  #     unless @post.user == current_user
+  #       redirect_to public_posts_path, notice: 'ゲストユーザーは編集できません'
+  #     end  
+  # end  
   
   private
   
