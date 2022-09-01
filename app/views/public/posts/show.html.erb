@@ -20,6 +20,15 @@
                             <td><%= image_tag @post.post_image, size: "600x400" %></td>
                         </tr>
                         <tr>
+                            <td>
+                                <div class="tag-box">
+                                    <% @post.tags.each do |tag| %>
+                                    <span class="label"><%= tag.name %></span>
+                                    <% end %>  
+                                </div>    
+                            </td>
+                        </tr>
+                        <tr>
                             
                             <td><p>タイトル</p><%= @post.title %></td>
                         </tr>

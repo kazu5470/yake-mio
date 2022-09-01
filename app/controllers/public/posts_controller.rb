@@ -9,6 +9,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
+    # @tag = @post.tags
   end
 
   def edit
@@ -19,9 +20,18 @@ class Public::PostsController < ApplicationController
     @posts = Post.all
   end
   
+  # def tag_posts
+  #   @tag = Tag.find(params[:id])
+  #   @post = @tag.posts
+  # end  
+  
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
+      tags = Vision.get_image_data(@post.post_image)
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end  
       redirect_to public_post_path(@post), notice: "正常に投稿できました"
     else
       render 'new', notice: "投稿できませんでした"
@@ -57,7 +67,7 @@ class Public::PostsController < ApplicationController
   
   private
     def post_params
-      params.require(:post).permit(:title, :body, :post_image, :lat, :lng, :star)
+      params.require(:post).permit(:title, :body, :post_image, :lat, :lng, :star, :tag_id)
     end  
   
 end

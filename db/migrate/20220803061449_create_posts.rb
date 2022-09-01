@@ -7,6 +7,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.float :lat
       t.float :lng
       t.float :star
+      t.decimal :score
       t.timestamps
     end
   end

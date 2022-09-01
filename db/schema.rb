@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
     t.float "lat"
     t.float "lng"
     t.float "star"
+    t.decimal "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,7 +94,8 @@ ActiveRecord::Schema.define(version: 2022_08_04_090109) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag_name"
+    t.string "name"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
