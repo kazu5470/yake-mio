@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   namespace :public do
     #ゲストログインのための記述
     post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
+    get 'tag_posts/:tag_id' => 'posts#tag_posts', as: 'tag_posts'
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
-      get 'tag_posts' => 'posts#tag_posts', as: 'tag_posts'
     end
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'

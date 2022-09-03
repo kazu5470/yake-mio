@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
-    # @tag = @post.tags
+    @tag = Tag.find(params[:id])
   end
 
   def edit
@@ -20,10 +20,11 @@ class Public::PostsController < ApplicationController
     @posts = Post.all
   end
   
-  # def tag_posts
-  #   @tag = Tag.find(params[:id])
-  #   @post = @tag.posts
-  # end  
+  def tag_posts
+    @tag = Tag.find(params[:tag_id])
+    target_posts_ids = Tag.where(name: @tag.name).pluck(:post_id)
+    @post = Post.where(id: target_posts_ids)
+  end  
   
   def create
     @post = current_user.posts.new(post_params)

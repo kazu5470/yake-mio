@@ -23,7 +23,7 @@
                             <td>
                                 <div class="tag-box">
                                     <% @post.tags.each do |tag| %>
-                                    <span class="label"><%= tag.name %></span>
+                                    <span class="label"><%= link_to tag.name, public_tag_posts_path(tag.id) %></span>
                                     <% end %>  
                                 </div>    
                             </td>

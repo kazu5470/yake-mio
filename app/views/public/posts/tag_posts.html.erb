@@ -1,5 +1,51 @@
-<% @post.each do |post| %>
-    <%= post.post_image %>
-    <%= post.title %>
-    <%= post.body %>
-<% end %>
+<div class="container-fluid" id="container">
+    <div id="tag">
+        <h6>タグ名＜<%= @tag.name %>＞の投稿一覧</h6>
+    </div>
+    <table border='2' id="table">
+        <thead>
+            <th class="col-md-2 text-center">投稿画像</th>
+            <th class="col-md-3 text-center">氏名</th>
+            <th class="col-md-2 text-center">タイトル</th>
+            <th class="col-md-3 text-center">投稿内容</th>
+        </thead>
+        <% @post.each do |post| %>
+            <tr>
+                <td class="text-center">
+                    <% if post.post_image.attached? %>
+                        <%= link_to public_post_path(post), method: :get do %>
+                            <%= image_tag post.post_image, size: '200x150'%>
+                        <% end %>    
+                    <% else %>
+                        <%= link_to public_post_path(post), method: :get do %>
+                            <%= image_tag 'oga4.png', size: '200x150' %>
+                        <% end %>    
+                    <% end %>    
+                <td class="text-center"><% if post.user.email != "guest@example.com" %>
+                                            <%= link_to public_user_path(post.user.id), method: :get do %>
+                                                <%= post.user.first_name %><%= post.user.last_name %>
+                                            <% end %>    
+                                        <% else %>
+                                            <%= post.user.first_name %><%= post.user.last_name %>
+                                        <% end %>    
+                </td>                        
+                <td class="text-center" height='50'><%= post.title %></td>
+                <td class="text-center"><%= post.body %></td>
+            </tr>
+        <% end %>   
+    </table>
+</div>
+
+<style>
+    #table {
+        margin-left: 250px;
+    }
+    #container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    #tag {
+        margin-left: 300px;
+    }
+</style>
