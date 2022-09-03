@@ -42,6 +42,11 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      @post.tags = []
+      tags = Vision.get_image_data(@post.post_image)
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
       redirect_to public_post_path(@post), notice: "投稿が更新されました"
     else
       flash[:notice] = "更新できませんでした"
