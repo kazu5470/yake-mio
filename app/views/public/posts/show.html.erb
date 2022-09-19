@@ -53,25 +53,8 @@
                             </th>        
                         </tr>
                         <tr>
-                            <th>
-                                <% if user_signed_in? %>
-                                    <% if @post.favorited_by?(current_user) %>
-                                        <p>
-                                          <%= link_to public_post_favorites_path(@post), method: :delete do %>
-                                            <%= image_tag "nightview-on.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
-                                          <% end %>
-                                        </p>
-                                    <% else %>
-                                        <p>
-                                          <%= link_to public_post_favorites_path(@post), method: :post do %>
-                                            <%= image_tag "nightview-off.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
-                                          <% end %>
-                                        </p>
-                                    <% end %>    
-                                <% else %>
-                                    <%= image_tag "nightview-on.jpeg", size: "40x40" %><%= @post.favorites.count %> いいね
-                                <% end %>    
-                                    
+                            <th class="favorite-btn">
+                                <%= render 'public/favorites/favorite-btn', post: @post %>
                             </th>    
                         </tr>
                         <tr>
@@ -159,16 +142,17 @@
                         
             </table>    
             <% if post_comment.user == current_user %>
-                <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), remote: true, method: :delete %>
             <% end %>
           <% end %>
         </div>
         <% if user_signed_in? %>
             <div id="comment">
-              <%= form_with(model: [:public, @post, @post_comment], method: :post) do |f| %>
-                <%= f.text_area :body, placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
+                <%= form_with(model: [:public, @post, @post_comment], remote: true) do |f| %>
+                    <%= f.text_area :body, placeholder: "コメントをここに" %>
+                    <%= f.submit "送信する" %>
+                <% end %>
+              <%#= render 'public/post_comments/comments', post: @post, post_comment: @post_comment %>
         <% end %>      
             </div>
     </div>        
