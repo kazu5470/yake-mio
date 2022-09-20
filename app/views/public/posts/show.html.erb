@@ -142,18 +142,15 @@
                         
             </table>    
             <% if post_comment.user == current_user %>
-                <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+                <%= link_to "削除", public_post_post_comment_path(post_comment.post, post_comment), remote: true, method: :delete %>
             <% end %>
           <% end %>
         </div>
         <% if user_signed_in? %>
             <div id="comment">
-              <%= form_with(model: [:public, @post, @post_comment], method: :post) do |f| %>
-                <%= f.text_area :body, placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
+              <%= render partial: 'public/post_comments/comments', locals: {post: @post, post_comment: @post_comment} %>
+            </div>  
         <% end %>      
-            </div>
     </div>        
 </div>
 
